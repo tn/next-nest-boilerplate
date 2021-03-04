@@ -1,0 +1,17 @@
+version: '3.8'
+
+volumes:
+  next-nest-boilerplate:
+
+services:
+  next-nest-boilerplate-db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=localdb
+    volumes:
+      - next-nest-boilerplate:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
