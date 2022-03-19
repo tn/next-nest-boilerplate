@@ -1,8 +1,9 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Header from '../components/header/header'
-import { Container, Heading, Text } from '@theme-ui/components'
+import Header from '@/components/header/header'
+import { Box, Layout } from '@/components/layout/layout'
+import { P } from '@/components/typography/typography'
 
 const Home: NextPage = () => {
   return (
@@ -11,20 +12,32 @@ const Home: NextPage = () => {
         <title>Next Nest Boilerplate</title>
       </Head>
       <Header />
-      <Container px={4} py={3}>
-        <Heading mb={2}>Pages:</Heading>
-        <Text mb={3}>
+      <Layout>
+        <Box css={{ marginBottom: '20px' }}>
+          <h1>Next-Nest Boilerplate</h1>
+          <ul style={{ marginLeft: '20px' }}>
+            <li>Next.js</li>
+            <li>Nest.js</li>
+            <li>Prisma ORM + Postgres</li>
+            <li>Next-Auth</li>
+            <li>Stitches</li>
+            <li>Formik + Yup</li>
+            <li>Avvvatars</li>
+          </ul>
+        </Box>
+        <h2>Pages:</h2>
+        <P>
           <Link href="/account">Account [protected]</Link>
           <br />
           <Link href="/about">About [public]</Link>
-        </Text>
-        <Heading mb={2}>Apis:</Heading>
-        <Text mb={3}>
-          <a href="/api/app/protected">api/protected</a>
+        </P>
+        <h2>Apis:</h2>
+        <P>
+          <Link href="/api/app/protected">api/protected</Link>
           <br />
-          <a href="/api/app/hello">api/hello</a>
-        </Text>
-      </Container>
+          <Link href="/api/app/hello">api/hello</Link>
+        </P>
+      </Layout>
     </>
   )
 }

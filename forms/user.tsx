@@ -1,7 +1,10 @@
 import { useFormik } from 'formik'
 import { FC } from 'react'
 import * as Yup from 'yup'
-import { Box, Button, Field, Text, useThemeUI } from 'theme-ui'
+import { Box, Flex } from '@/components/layout/layout'
+import Field from '@/components/field/field'
+import Button from '@/components/button/button'
+import { Text } from '@/components/typography/typography'
 
 interface UserFormProps {
   name: string
@@ -16,7 +19,6 @@ const validationSchema = Yup.object({
 })
 
 const UserForm: FC<UserFormProps> = ({ name, image, onSuccess, onFail }) => {
-  const { theme: { colors } } = useThemeUI()
   const formik = useFormik({
     initialValues: {
       name,
@@ -43,44 +45,44 @@ const UserForm: FC<UserFormProps> = ({ name, image, onSuccess, onFail }) => {
         }
       } catch {
         onFail()
+      } finally {
+        setSubmitting(false)
       }
-
-      setSubmitting(false)
     }
   })
 
   return (
     <Box>
-      <form onSubmit={formik.handleSubmit} autoComplete="off">
-        <Field
-          sx={{
-            marginBottom: 3,
-            borderColor: formik.errors.name ? 'red' : colors.gray
-          }}
-          label="Name"
-          name="name"
-          id="name"
-          defaultValue={formik.values.name}
-          onChange={formik.handleChange}
-        />
-        {formik.errors.name && <Text sx={{ marginTop: -3, marginBottom: 3 }} variant="error">{formik.errors.name}</Text>}
+      <Flex flow="vertical" as="form" onSubmit={formik.handleSubmit} autoComplete="off">
+        <Box css={{ marginBottom: '6px' }}>
+          <Field
+            invalid={!!formik.errors.name}
+            name="name"
+            id="name"
+            defaultValue={formik.values.name}
+            onChange={formik.handleChange}
+            placeholder="Name"
+          />
+          {formik.errors.name && <Text invalid>{formik.errors.name}</Text>}
+        </Box>
 
-        <Field
-          sx={{
-            marginBottom: 3,
-            borderColor: formik.errors.image ? 'red' : colors.gray
-          }}
-          label="Photo URL"
-          name="image"
-          id="image"
-          defaultValue={formik.values.image}
-          onChange={formik.handleChange}
-        />
-        {formik.errors.image && <Text sx={{ marginTop: -3, marginBottom: 3 }} variant="error">{formik.errors.image}</Text>}
+        <Box css={{ marginBottom: '12px' }}>
+          <Field
+            invalid={!!formik.errors.image}
+            name="image"
+            id="image"
+            defaultValue={formik.values.image}
+            onChange={formik.handleChange}
+            placeholder="Image url"
+          />
+          {formik.errors.image && <Text invalid>{formik.errors.image}</Text>}
+        </Box>
 
-        <Button disabled={formik.isSubmitting} variant="primary" type="submit">Save</Button>
-        <Button variant="default" type="button" onClick={formik.handleReset}>Reset</Button>
-      </form>
+        <Flex align="between">
+          <Button css={{ marginRight: '10px' }} kind="primary" disabled={formik.isSubmitting} type="submit">Save</Button>
+          <Button onClick={formik.handleReset}>Reset</Button>
+        </Flex>
+      </Flex>
     </Box>
   )
 }

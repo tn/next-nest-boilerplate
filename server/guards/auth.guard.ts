@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
