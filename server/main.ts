@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app/app.module'
+import { AppModule } from '@/server/app/app.module'
 import * as http from 'http'
 import { NextApiHandler } from 'next'
 import { INestApplication } from '@nestjs/common'
@@ -27,6 +27,7 @@ export module Backend {
     const app = await getApp()
     const server: http.Server = app.getHttpServer()
     const [ listener ] = server.listeners('request') as NextApiHandler[]
+
     return listener
   }
 }

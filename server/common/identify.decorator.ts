@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 
 const Identify = createParamDecorator(async (_, ctx: ExecutionContext) => {
   const req = ctx.switchToHttp().getRequest()

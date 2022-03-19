@@ -6,6 +6,15 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/forms/*": ["forms/*"],
+      "@/pages/*": ["pages/*"],
+      "@/server/*": ["server/*"],
+      "@/public/*": ["public/*"],
+      "@/prisma/*": ["prisma/*"],
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -22,7 +31,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

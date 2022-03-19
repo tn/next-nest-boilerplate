@@ -1,14 +1,26 @@
-import { Provider } from 'next-auth/client'
-import { ThemeProvider } from 'theme-ui'
-import theme from '../themes/theme'
+import { SessionProvider } from 'next-auth/react'
+import { globalCss } from 'stitches.config'
+
+const globalStyles = globalCss({
+  '*': {
+    padding: 0,
+    margin: 0,
+    boxSizing: 'border-box',
+  },
+  body: {
+    fontFamily: 'system-ui',
+  },
+  a: {
+    color: '$secondary',
+  },
+})
 
 function App({ Component, pageProps }) {
   return (
-    <Provider session={pageProps.session}>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </Provider>
+    <SessionProvider session={pageProps.session}>
+      {globalStyles()}
+      <Component {...pageProps} />
+    </SessionProvider>
   )
 }
 
